@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import GlobalContext from "../context/GlobalContext";
-const labelsClasses = ["red", "gray", "green", "blue"];
+const labelsClasses = ["blue","red", "gray", "green" ];
 
 
 export default function EventModal() {
