@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import GlobalContext from "../context/GlobalContext";
-const labelsClasses = ["blue","red", "gray", "green" ];
+const labelsClasses = ["blue","green","red", "gray" ];
 
 
 export default function EventModal() {
@@ -89,7 +89,7 @@ export default function EventModal() {
                 <span
                   key={i}
                   onClick={() => setSelectedLabel(lblClass)}
-                  className={`bg-${lblClass}-500 w-6 h-6 rounded-full flex items-center justify-center cursor-pointer`}
+                  className={`${lblClass} w-6 h-6 rounded-full flex items-center justify-center cursor-pointer`}
                 >
                   {selectedLabel === lblClass && (
                     <span className="material-icons-outlined text-white text-sm">

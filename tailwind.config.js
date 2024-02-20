@@ -8,7 +8,12 @@ module.exports = {
       },
       gridTemplateColumns:{
         "1/5": "1fr 5fr "
-      }
+      },
+      colors: {
+        'blue-main':'#3C96FF',
+        'green-main':'#41DB6D',
+       
+      },
     },
   },
   plugins: [

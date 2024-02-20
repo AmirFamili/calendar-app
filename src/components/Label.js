@@ -14,9 +14,9 @@ export default function Labels() {
             onChange={() =>
               updateLabel({ label: lbl, checked: !checked })
             }
-            className={`form-checkbox h-5 w-5 text-${lbl}-400 rounded focus:ring-0 cursor-pointer`}
+            className={`form-checkbox h-5 w-5 txt-${lbl} rounded focus:ring-0 cursor-pointer`}
           />
-          <span className={`ml-2 text-${lbl}-500 capitalize`}>{lbl}</span>
+          <span className={`ml-2 txt-${lbl} capitalize`}>{lbl}</span>
         </label>
       ))}
     </React.Fragment>

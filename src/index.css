@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.red{
+    background-color:rgb(238, 39, 39);
+}
+
+.green{
+    background-color:rgb(27, 167, 27);
+}
+
+.blue{
+    background-color: rgb(28, 72, 255);
+}
+.gray{
+    background-color: rgb(139, 139, 143);
+}
+
+
+
+.txt-red{
+    color:  rgb(238, 39, 39);
+}
+
+.txt-blue{
+    color:  rgb(28, 72, 255);
+}
+
+.txt-green{
+    color:  rgb(27, 167, 27);
+}
+
+.txt-gray{
+    color:  rgb(139, 139, 143);
+}

@@ -40,7 +40,7 @@ export const Day = ({ day, rowIdx }) => {
           <div
             key={idx}
             onClick={() => setSelectedEvent(evt)}
-            className={`bg-${evt.label}-500 p-1 mr-3 text-gray-300 text-sm rounded mb-1 truncate`}
+            className={`${evt.label} p-1 mr-3 text-gray-200 text-sm rounded mb-1 truncate`}
           >
             {evt.title}
           </div>
