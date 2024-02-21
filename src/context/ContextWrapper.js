@@ -32,12 +32,12 @@ export default function ConextWrapper(props) {
     [],
     initEvents
   );
-
+  const [showPopup, setShowPopup] = useState(false);
+  const [confirmation, setConfirmation ] = useState(null);
+  const [popupModel,setPopupModel]=useState(null);
   useEffect(() => {
     localStorage.setItem("savedEvents", JSON.stringify(savedEvents));
   }, [savedEvents]);
-
-
 
   const filteredEvents = useMemo(() => {
     return savedEvents.filter((evt) =>
@@ -48,28 +48,20 @@ export default function ConextWrapper(props) {
     );
   }, [savedEvents, labels]);
 
-
-
   useEffect(() => {
     setLabels((prevLabels) => {
-      return [...new Set(savedEvents.map((evt) => evt.label))].map(
-        (label) => {
-          const currentLabel = prevLabels.find(
-            (lbl) => lbl.label === label
-          );
-          return {
-            label,
-            checked: currentLabel ? currentLabel.checked : true,
-          };
-        }
-      );
+      return [...new Set(savedEvents.map((evt) => evt.label))].map((label) => {
+        const currentLabel = prevLabels.find((lbl) => lbl.label === label);
+        return {
+          label,
+          checked: currentLabel ? currentLabel.checked : true,
+        };
+      });
     });
   }, [savedEvents]);
 
   function updateLabel(label) {
-    setLabels(
-      labels.map((lbl) => (lbl.label === label.label ? label : lbl))
-    );
+    setLabels(labels.map((lbl) => (lbl.label === label.label ? label : lbl)));
   }
 
   useEffect(() => {
@@ -84,11 +76,6 @@ export default function ConextWrapper(props) {
     }
   }, [smallCalendarMonth]);
 
-
-
-
-
-
   return (
     <GlobalContext.Provider
       value={{
@@ -102,13 +89,18 @@ export default function ConextWrapper(props) {
         setShowEventModal,
         dispatchCalEvent,
         selectedEvent,
-        setSelectedEvent,  
+        setSelectedEvent,
         savedEvents,
         labels,
         setLabels,
         updateLabel,
         filteredEvents,
-
+        showPopup,
+        setShowPopup,
+        confirmation,
+        setConfirmation,
+        popupModel,
+        setPopupModel
       }}
     >
       {props.children}

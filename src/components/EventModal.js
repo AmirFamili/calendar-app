@@ -1,30 +1,68 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import GlobalContext from "../context/GlobalContext";
-const labelsClasses = ["blue","green","red", "gray" ];
-
+const labelsClasses = ["blue", "green", "red", "gray"];
 
 export default function EventModal() {
-  const { setShowEventModal, daySelected, dispatchCalEvent, selectedEvent } = useContext(GlobalContext);
-  const [title, setTitle] = useState(selectedEvent?selectedEvent.title:'');
-  const [description, setDescription] = useState(selectedEvent?selectedEvent.title:'');
-  const [selectedLabel, setSelectedLabel] = useState(selectedEvent?labelsClasses.find((lbl)=>lbl===selectedEvent.label):labelsClasses[0]);
+  const {
+    setShowEventModal,
+    daySelected,
+    dispatchCalEvent,
+    selectedEvent,
+    setShowPopup,
+    confirmation,
+    setConfirmation,
+    popupModel,
+    setPopupModel,
+  } = useContext(GlobalContext);
+
+  const [title, setTitle] = useState(selectedEvent ? selectedEvent.title : "");
+  const [description, setDescription] = useState(
+    selectedEvent ? selectedEvent.description : ""
+  );
+  const [selectedLabel, setSelectedLabel] = useState(
+    selectedEvent
+      ? labelsClasses.find((lbl) => lbl === selectedEvent.label)
+      : labelsClasses[0]
+  );
+  useEffect(() => {
+    if (popupModel === "save") {
+      if (confirmation) {
+        const calendarEvent = {
+          title,
+          description,
+          label: selectedLabel,
+          day: daySelected.valueOf(),
+          id: selectedEvent ? selectedEvent.id : Date.now(),
+        };
+        if (selectedEvent) {
+          dispatchCalEvent({ type: "update", payload: calendarEvent });
+        } else {
+          dispatchCalEvent({ type: "push", payload: calendarEvent });
+        }
+        setShowEventModal(false);
+        setConfirmation(false);
+        setPopupModel(null);
+      }
+    } else if (popupModel === "close") {
+      if (confirmation) {
+        setShowEventModal(false);
+        setConfirmation(false);
+        setPopupModel(null);
+      }
+    }else if(popupModel === "delete"){
+      if (confirmation) {
+      dispatchCalEvent({ type: "delete", payload: selectedEvent });
+      setShowEventModal(false);
+      setConfirmation(false);
+      setPopupModel(null);
+      }
+    }
+  }, [confirmation]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const calendarEvent = {
-      title,
-      description,
-      label: selectedLabel,
-      day: daySelected.valueOf(),
-      id:selectedEvent?selectedEvent.id: Date.now(),
-    };
-    if(selectedEvent){
-      dispatchCalEvent({ type: "update", payload: calendarEvent });
-    }else{
-      dispatchCalEvent({ type: "push", payload: calendarEvent });
-    }
-    
-    setShowEventModal(false);
+    setPopupModel("save");
+    setShowPopup(true);
   };
 
   return (
@@ -35,23 +73,30 @@ export default function EventModal() {
             drag_handle
           </span>
           <div>
-            {selectedEvent && ( <span
-              onClick={() =>{ dispatchCalEvent({type:"delete", payload:selectedEvent}); 
-              setShowEventModal(false)}}
-              className="material-icons-outlined text-gray-400 cursor-pointer"
-            >
-            delete
-            </span>)}
+            {selectedEvent && (
+              <span
+                onClick={() => {
+                  setPopupModel("delete");
+                  setShowPopup(true);
+                 
+                }}
+                className="material-icons-outlined text-gray-400 cursor-pointer"
+              >
+                delete
+              </span>
+            )}
             <button>
-            <span
-              onClick={() => setShowEventModal(false)}
-              className="material-icons-outlined text-gray-400"
-            >
-              close
-            </span>
-          </button>
+              <span
+                onClick={() => {
+                  setPopupModel("close");
+                  setShowPopup(true);
+                }}
+                className="material-icons-outlined text-gray-400"
+              >
+                close
+              </span>
+            </button>
           </div>
-          
         </header>
         <div className="p-3">
           <div className="grid grid-cols-1/5 items-end gap-y-7">
@@ -89,7 +134,7 @@ export default function EventModal() {
                 <span
                   key={i}
                   onClick={() => setSelectedLabel(lblClass)}
-                  className={`${lblClass} w-6 h-6 rounded-full flex items-center justify-center cursor-pointer`}
+                  className={`${lblClass}-circle w-6 h-6 rounded-full flex items-center justify-center cursor-pointer`}
                 >
                   {selectedLabel === lblClass && (
                     <span className="material-icons-outlined text-white text-sm">
@@ -102,13 +147,29 @@ export default function EventModal() {
           </div>
         </div>
         <footer className="flex justify-end border-t p-3 mt-5">
-          <button
-            type="submit"
-            className="bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded text-white"
-            onClick={handleSubmit}
-          >
-            Save
-          </button>
+          <div className="group relative">
+            <button
+              type="submit"
+              className={
+                title
+                  ? "bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded text-white "
+                  : "bg-slate-400 px-6 py-2 rounded text-white"
+              }
+              disabled={title ? false : true}
+              onClick={handleSubmit}
+            >
+              Save
+            </button>
+            <div
+              className={
+                title
+                  ? "hidden"
+                  : "text-center absolute right-0 w-44 bg-slate-200 rounded py-2 px-2 text-slate-800  text-sm mt-2 hidden group-hover:block shadow-md"
+              }
+            >
+              Title cannot be empty!
+            </div>
+          </div>
         </footer>
       </form>
     </div>

@@ -2,36 +2,53 @@
 @tailwind components;
 @tailwind utilities;
 
-
-.red{
-    background-color:rgb(238, 39, 39);
+.red-circle {
+  background-color: rgb(238, 39, 39);
+}
+.blue-circle {
+  background-color: rgb(28, 72, 255);
+}
+.green-circle {
+  background-color: rgb(27, 167, 27);
+}
+.gray-circle {
+  background-color: rgb(139, 139, 143);
+}
+.red-box {
+  background-color: rgb(245, 214, 214);
+  border-left: 2px rgb(238, 39, 39) solid;
+  color: rgb(203, 14, 14);
 }
 
-.green{
-    background-color:rgb(27, 167, 27);
+.blue-box {
+  background-color: rgb(197, 207, 248);
+  border-left: 2px rgb(28, 72, 255) solid;
+  color: rgb(1, 44, 217);
+}
+.green-box {
+  background-color: rgb(207, 245, 207);
+  border-left: 2px rgb(27, 167, 27) solid;
+  color: rgb(13, 117, 13);
 }
 
-.blue{
-    background-color: rgb(28, 72, 255);
-}
-.gray{
-    background-color: rgb(139, 139, 143);
-}
-
-
-
-.txt-red{
-    color:  rgb(238, 39, 39);
+.gray-box {
+  background-color: rgb(228, 228, 233);
+  border-left: 2px rgb(139, 139, 143) solid;
+  color: rgb(106, 106, 110);
 }
 
-.txt-blue{
-    color:  rgb(28, 72, 255);
+.txt-red {
+  color: rgb(238, 39, 39);
 }
 
-.txt-green{
-    color:  rgb(27, 167, 27);
+.txt-blue {
+  color: rgb(28, 72, 255);
 }
 
-.txt-gray{
-    color:  rgb(139, 139, 143);
+.txt-green {
+  color: rgb(27, 167, 27);
+}
+
+.txt-gray {
+  color: rgb(139, 139, 143);
 }
