@@ -52,3 +52,7 @@
 .txt-gray {
   color: rgb(139, 139, 143);
 }
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+  background: none;
+}

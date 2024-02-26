@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import dayjs from "dayjs";
 import GlobalContext from "../context/GlobalContext";
 const labelsClasses = ["blue", "green", "red", "gray"];
 
@@ -6,6 +7,7 @@ export default function EventModal() {
   const {
     setShowEventModal,
     daySelected,
+    setDaySelected,
     dispatchCalEvent,
     selectedEvent,
     setShowPopup,
@@ -13,9 +15,14 @@ export default function EventModal() {
     setConfirmation,
     popupModel,
     setPopupModel,
+    hourSelected,
+    setHourSelected,
   } = useContext(GlobalContext);
 
   const [title, setTitle] = useState(selectedEvent ? selectedEvent.title : "");
+  const [time, setTime] = useState(
+    selectedEvent ? selectedEvent.time : hourSelected
+  );
   const [description, setDescription] = useState(
     selectedEvent ? selectedEvent.description : ""
   );
@@ -24,11 +31,13 @@ export default function EventModal() {
       ? labelsClasses.find((lbl) => lbl === selectedEvent.label)
       : labelsClasses[0]
   );
+
   useEffect(() => {
     if (popupModel === "save") {
       if (confirmation) {
         const calendarEvent = {
           title,
+          time,
           description,
           label: selectedLabel,
           day: daySelected.valueOf(),
@@ -42,19 +51,22 @@ export default function EventModal() {
         setShowEventModal(false);
         setConfirmation(false);
         setPopupModel(null);
+       
       }
     } else if (popupModel === "close") {
       if (confirmation) {
         setShowEventModal(false);
         setConfirmation(false);
         setPopupModel(null);
+       
       }
-    }else if(popupModel === "delete"){
+    } else if (popupModel === "delete") {
       if (confirmation) {
-      dispatchCalEvent({ type: "delete", payload: selectedEvent });
-      setShowEventModal(false);
-      setConfirmation(false);
-      setPopupModel(null);
+        dispatchCalEvent({ type: "delete", payload: selectedEvent });
+        setShowEventModal(false);
+        setConfirmation(false);
+        setPopupModel(null);
+       
       }
     }
   }, [confirmation]);
@@ -78,7 +90,6 @@ export default function EventModal() {
                 onClick={() => {
                   setPopupModel("delete");
                   setShowPopup(true);
-                 
                 }}
                 className="material-icons-outlined text-gray-400 cursor-pointer"
               >
@@ -113,7 +124,19 @@ export default function EventModal() {
             <span className="material-icons-outlined text-gray-400">
               schedule
             </span>
-            <p>{daySelected.format("dddd, MMMM DD")}</p>
+            <p>
+              {daySelected.format("dddd, MMMM DD")}
+
+              <input
+                className="border-none rounded-md mt-2 mx-1 p-1 cursor-pointer"
+                type="time"
+                name="time"
+                step="3600"
+                value={time}
+                onChange={(e) => setTime(e.target.value)}
+              />
+            </p>
+
             <span className="material-icons-outlined text-gray-400">
               segment
             </span>

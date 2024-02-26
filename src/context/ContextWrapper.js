@@ -21,9 +21,13 @@ const initEvents = () => {
   return parsedEvents;
 };
 export default function ConextWrapper(props) {
+  const [yearIndex, setYearIndex] = useState(dayjs().year());
   const [monthIndex, setMonthIndex] = useState(dayjs().month());
+  const [dayIndex, setDayIndex] = useState(dayjs().date());
   const [smallCalendarMonth, setSmallCalendarMonth] = useState(null);
+  const [smallCalendarYear, setSmallCalendarYear] = useState(null);
   const [daySelected, setDaySelected] = useState(dayjs());
+  const [hourSelected,setHourSelected]=useState('8:00');
   const [showEventModal, setShowEventModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [labels, setLabels] = useState([]);
@@ -76,15 +80,29 @@ export default function ConextWrapper(props) {
     }
   }, [smallCalendarMonth]);
 
+  useEffect(() => {
+    if (smallCalendarYear !== null) {
+      setYearIndex(smallCalendarYear);
+    }
+  }, [smallCalendarYear]);
+  
   return (
     <GlobalContext.Provider
       value={{
+        yearIndex,
+        setYearIndex,
         monthIndex,
         setMonthIndex,
+        dayIndex,
+        setDayIndex,
         smallCalendarMonth,
         setSmallCalendarMonth,
+        smallCalendarYear,
+        setSmallCalendarYear,
         daySelected,
         setDaySelected,
+        hourSelected,
+        setHourSelected,
         showEventModal,
         setShowEventModal,
         dispatchCalEvent,
