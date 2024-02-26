@@ -27,7 +27,7 @@ function App() {
     <React.Fragment>
       {showPopup && <Popups />}
       {showEventModal && <EventModal />}
-      <div className="flex flex-1">
+      <div className="flex flex-1 ">
         <Sidebar />
 
         <Routes>
@@ -45,7 +45,7 @@ function App() {
           <Route
             path="/calendar-app/day"
             element={
-              <div className="h-screen w-full flex flex-col">
+              <div className="h-screen  w-full flex flex-col">
                  <CalendarHeaderDay />
                 <Day day={currentDay} month={currentMonth}/>
               </div>

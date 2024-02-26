@@ -24,7 +24,7 @@ export const CalendarHeader = () => {
     setMonthIndex(daySelected.month());
     setYearIndex(daySelected.year())
   }, [daySelected]);
-  
+
   const handlePrevMonth = () => {
     setMonthIndex(monthIndex - 1);
   };
@@ -47,30 +47,30 @@ export const CalendarHeader = () => {
     )
   };
   return (
-    <header className="p-4 ml-2 flex item-center">
-      <button onClick={handlePrevMonth}>
-        <span className="material-icons-outlined cursor-pointer bg-slate-100 rounded-tl-lg  rounded-bl-lg text-gray-800 h-10 border-r-white flex justify-center items-center">
+    <header className="p-4 pl-6 flex item-center ">
+      
+        <span onClick={handlePrevMonth} className="material-icons-outlined cursor-pointer bg-slate-100 rounded-tl-lg  rounded-bl-lg text-gray-800 h-14 border-r-white flex justify-center items-center">
           chevron_left
         </span>
-      </button>
+   
 
       <button
-        className="border-r border-l border-white py-2 px-4 bg-slate-100"
+        className="border-r border-l border-white h-14 py-2 px-4 bg-slate-100"
         onClick={handleReset}
       >
         Today
       </button>
 
-      <button onClick={handleNextMonth}>
-        <span className="material-icons-outlined cursor-pointer bg-slate-100 rounded-tr-lg  rounded-br-lg text-gray-800 h-10 border-r-white flex justify-center items-center">
+    
+        <span onClick={handleNextMonth} className="material-icons-outlined cursor-pointer bg-slate-100 rounded-tr-lg  rounded-br-lg text-gray-800 h-14 border-r-white flex justify-center items-center">
           chevron_right
         </span>
-      </button>
+ 
 
-      <h2 className="ml-5 mt-1 text-xl text-gray-500 font-bold">
+      <h2 className="ml-5 mt-3 w-72 px-10 text-xl text-gray-500 font-bold">
         {dayjs(new Date(yearIndex, monthIndex)).format("MMMM YYYY")}
       </h2>
-      <div className="p-1 ml-10">
+      <div className="p-1 ml-10 mt-2">
         <Link
           to={"/calendar-app"}
           className="px-3 py-1 border mr-0.5 rounded-l-lg"
