@@ -56,12 +56,15 @@ export const MonthDay = ({ day, rowIdx }) => {
           setShowEventModal(true);
         }}
       >
-        {dayEvents.map((evt, idx) => (
+        {[].concat(dayEvents)
+        .sort((a,b)=>a.time>b.time?1:-1)
+        .map((evt, idx) => (
           <div
             key={idx}
             onClick={() => setSelectedEvent(evt)}
             className={`${evt.label}-box p-1 mr-3 ml-1 text-gray-200 text-sm rounded-r mb-1 truncate`}
           >
+            
             {evt.title}
           </div>
         ))}

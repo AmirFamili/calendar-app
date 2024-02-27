@@ -7,7 +7,7 @@ export const Hour = ({ hour, month}) => {
   const [hourEvents, setHourEvents] = useState([]); 
   const { setDaySelected, setShowEventModal,  filteredEvents,setSelectedEvent,setHourSelected } =
   useContext(GlobalContext);
-// console.log(hourSelected);
+
   useEffect(()=>{
     const events =  filteredEvents.filter(
       (evt) =>
@@ -18,9 +18,20 @@ export const Hour = ({ hour, month}) => {
     setHourEvents(events);
   },[filteredEvents,hour,month])
 
+  function formatAMPM(date) {
+    var hours = date;
+    var ampm = hours >= '12:00' ? 'pm' : 'am';
+    hours = hours.slice(0, 2)  ;
+    hours=hours %12;
+    hours = hours ? hours : 12; 
+   
+    var strTime = hours + ':00 ' + ampm;
+    
+    return strTime;
+  }
 
   return (
-    <div className="p-5 border-t flex items-center justify-center cursor-pointer" onClick={() => {
+    <div className="pl-5 h-16 border-t flex items-center justify-center cursor-pointer" onClick={() => {
       setHourSelected(hour.format("HH:00"));
       setDaySelected(hour);
       setShowEventModal(true);
@@ -34,9 +45,10 @@ export const Hour = ({ hour, month}) => {
           <div
             key={idx}
             onClick={() => setSelectedEvent(evt)}
-            className={`${evt.label}-box p-1 mr-3 ml-1 text-gray-200 text-sm rounded-r mb-1 truncate`}
+            className={`${evt.label}-box p-3  ml-1 text-gray-200 text-sm rounded-r truncate h-full grid grid-rows-2`}
           >
-            {evt.title}
+            <h6 className="text-xs">{formatAMPM(evt.time)}</h6>
+           <h5 className=" font-bold ">{evt.title}</h5> 
           </div>
         ))}
       </div>
