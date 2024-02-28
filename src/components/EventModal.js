@@ -91,21 +91,22 @@ export default function EventModal() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const storageEvents = localStorage.getItem("savedEvents");
-    const parsedEvents = storageEvents ? JSON.parse(storageEvents) : [];
-    parsedEvents.map((event) => {
-      const timeS = event.timeStart.split(":").map((val) => parseInt(val))[0];
-      const timeE = event.timeEnd.split(":").map((val) => parseInt(val))[0];
-      const timeStartNew = timeStart.split(":").map((val) => parseInt(val))[0];
-      const timeEndNew = timeEnd.split(":").map((val) => parseInt(val))[0];
-      setPopupModel("save");
-      setShowPopup(true);
-      // if (timeStartNew <= timeS && timeE >= timeEndNew) {
-      //   setCheckSave(false);
-      // } else {
-      //   setCheckSave(true);
-      // }
-    });
+    setPopupModel("save");
+    setShowPopup(true);
+    // const storageEvents = localStorage.getItem("savedEvents");
+    // const parsedEvents = storageEvents ? JSON.parse(storageEvents) : [];
+    // parsedEvents.map((event) => {
+    //   const timeS = event.timeStart.split(":").map((val) => parseInt(val))[0];
+    //   const timeE = event.timeEnd.split(":").map((val) => parseInt(val))[0];
+    //   const timeStartNew = timeStart.split(":").map((val) => parseInt(val))[0];
+    //   const timeEndNew = timeEnd.split(":").map((val) => parseInt(val))[0];
+
+    // if (timeStartNew <= timeS && timeE >= timeEndNew) {
+    //   setCheckSave(false);
+    // } else {
+    //   setCheckSave(true);
+    // }
+    // });
   };
 
   return (
