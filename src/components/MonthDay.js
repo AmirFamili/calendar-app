@@ -16,7 +16,9 @@ export const MonthDay = ({ day, rowIdx }) => {
     setShowEventModal,
     filteredEvents,
     setSelectedEvent,
-    setHourSelected,
+    setStartHourSelected,
+    setEndHourSelected,
+
   } = useContext(GlobalContext);
 
 
@@ -51,13 +53,14 @@ export const MonthDay = ({ day, rowIdx }) => {
       <div
         className="flex-1 cursor-pointer "
         onClick={() => {
-          setHourSelected("08:00");
+          setStartHourSelected("08:00");
+          setEndHourSelected("09:00");
           setDaySelected(day);
           setShowEventModal(true);
         }}
       >
         {[].concat(dayEvents)
-        .sort((a,b)=>a.time>b.time?1:-1)
+        .sort((a,b)=>a.timeStart>b.timeStart?1:-1)
         .map((evt, idx) => (
           <div
             key={idx}

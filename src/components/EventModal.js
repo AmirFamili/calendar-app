@@ -15,13 +15,16 @@ export default function EventModal() {
     setConfirmation,
     popupModel,
     setPopupModel,
-    hourSelected,
-    setHourSelected,
+    startHourSelected,
+    endHourSelected,
   } = useContext(GlobalContext);
 
   const [title, setTitle] = useState(selectedEvent ? selectedEvent.title : "");
-  const [time, setTime] = useState(
-    selectedEvent ? selectedEvent.time : hourSelected
+  const [timeStart, setTimeStart] = useState(
+    selectedEvent ? selectedEvent.timeStart : startHourSelected
+  );
+  const [timeEnd, setTimeEnd] = useState(
+    selectedEvent ? selectedEvent.timeEnd : endHourSelected
   );
   const [description, setDescription] = useState(
     selectedEvent ? selectedEvent.description : ""
@@ -31,13 +34,15 @@ export default function EventModal() {
       ? labelsClasses.find((lbl) => lbl === selectedEvent.label)
       : labelsClasses[0]
   );
+  const [checkSave, setCheckSave] = useState(null);
 
   useEffect(() => {
     if (popupModel === "save") {
       if (confirmation) {
         const calendarEvent = {
           title,
-          time,
+          timeStart,
+          timeEnd,
           description,
           label: selectedLabel,
           day: daySelected.valueOf(),
@@ -51,14 +56,12 @@ export default function EventModal() {
         setShowEventModal(false);
         setConfirmation(false);
         setPopupModel(null);
-       
       }
     } else if (popupModel === "close") {
       if (confirmation) {
         setShowEventModal(false);
         setConfirmation(false);
         setPopupModel(null);
-       
       }
     } else if (popupModel === "delete") {
       if (confirmation) {
@@ -66,20 +69,48 @@ export default function EventModal() {
         setShowEventModal(false);
         setConfirmation(false);
         setPopupModel(null);
-       
       }
     }
   }, [confirmation]);
 
+  // useEffect(() => {
+  //   if (checkSave !== null) {
+  //     if (checkSave) {
+  //       console.log(checkSave);
+  //       console.log("save");
+  //       setPopupModel("save");
+  //       setShowPopup(true);
+  //       setCheckSave(null);
+  //     } else {
+  //       console.log(checkSave);
+  //       console.log("not Save");
+  //       setCheckSave(null);
+  //     }
+  //   }
+  // }, [checkSave]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    setPopupModel("save");
-    setShowPopup(true);
+    const storageEvents = localStorage.getItem("savedEvents");
+    const parsedEvents = storageEvents ? JSON.parse(storageEvents) : [];
+    parsedEvents.map((event) => {
+      const timeS = event.timeStart.split(":").map((val) => parseInt(val))[0];
+      const timeE = event.timeEnd.split(":").map((val) => parseInt(val))[0];
+      const timeStartNew = timeStart.split(":").map((val) => parseInt(val))[0];
+      const timeEndNew = timeEnd.split(":").map((val) => parseInt(val))[0];
+      setPopupModel("save");
+      setShowPopup(true);
+      // if (timeStartNew <= timeS && timeE >= timeEndNew) {
+      //   setCheckSave(false);
+      // } else {
+      //   setCheckSave(true);
+      // }
+    });
   };
 
   return (
-    <div className="  h-screen w-full fixed left-0 top-0 flex justify-center items-center ">
-      <form action="" className="rounded-lg bg-white shadow-2xl w-1/4 ">
+    <div className=" z-30 h-screen w-full fixed left-0 top-0 flex justify-center items-center ">
+      <form action="" className="rounded-lg bg-white shadow-2xl ">
         <header className="bg-gray-100 px-4 py-2 flex justify-between  items-center">
           <span className="material-icons-outlined text-gray-400">
             drag_handle
@@ -124,18 +155,28 @@ export default function EventModal() {
             <span className="material-icons-outlined text-gray-400">
               schedule
             </span>
-            <p>
+            <div>
               {daySelected.format("dddd, MMMM DD")}
-
-              <input
-                className="border-none rounded-md mt-2 mx-1 p-1 cursor-pointer"
-                type="time"
-                name="time"
-                step="3600"
-                value={time}
-                onChange={(e) => setTime(e.target.value)}
-              />
-            </p>
+              <div className="flex mt-1 ">
+                <input
+                  className="border-none rounded-md p-0 cursor-pointer"
+                  type="time"
+                  name="time"
+                  step="3600"
+                  value={timeStart}
+                  onChange={(e) => setTimeStart(e.target.value)}
+                />
+                <i className="m-1 fa-solid fa-minus"></i>
+                <input
+                  className="border-none rounded-md p-0 pl-2 cursor-pointer"
+                  type="time"
+                  name="time"
+                  step="3600"
+                  value={timeEnd}
+                  onChange={(e) => setTimeEnd(e.target.value)}
+                />
+              </div>
+            </div>
 
             <span className="material-icons-outlined text-gray-400">
               segment

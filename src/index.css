@@ -56,3 +56,61 @@
 input[type="time"]::-webkit-calendar-picker-indicator {
   background: none;
 }
+
+
+.hour-7{
+  height: 448px;
+}
+
+.hour-8{
+  height: 511px;
+}
+.hour-9{
+  height: 576px;
+}
+
+.hour-10{
+  height: 640px;
+}
+
+.hour-11{
+  height: 703px;
+}
+
+.hour-12{
+  height: 768px;
+}
+.hour-13{
+  height: 831px;
+}
+
+.hour-14{
+  height: 895px;
+}
+.hour-15{
+  height: 959px;
+}
+.hour-16{
+  height: 1023px;
+}
+.hour-17{
+  height: 1087px;
+}
+.hour-18{
+  height: 1151px;
+}
+.hour-19{
+  height: 1215px;
+}
+.hour-20{
+  height: 1279px;
+}
+.hour-21{
+  height: 1343px;
+}
+.hour-22{
+  height: 1407px;
+}
+.hour-23{
+  height: 1471px;
+}

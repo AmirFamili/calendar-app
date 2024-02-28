@@ -62,12 +62,12 @@ export const CalendarHeader = () => {
       </button>
 
     
-        <span onClick={handleNextMonth} className="material-icons-outlined cursor-pointer bg-slate-100 rounded-tr-lg  rounded-br-lg text-gray-800 h-14 border-r-white flex justify-center items-center">
+        <span onClick={handleNextMonth} className="material-icons-outlined cursor-pointer bg-slate-100 rounded-tr-lg  rounded-br-lg text-gray-800 h-14 border-r-white flex justify-center items-center ">
           chevron_right
         </span>
  
 
-      <h2 className="ml-5 mt-3 w-72 px-10 text-xl text-gray-500 font-bold">
+      <h2 className="ml-5 mt-3 w-72 px-10 text-xl text-gray-500 font-bold max-md:pl-2 max-md:pr-0 ">
         {dayjs(new Date(yearIndex, monthIndex)).format("MMMM YYYY")}
       </h2>
       <div className="p-1 ml-10 mt-2">

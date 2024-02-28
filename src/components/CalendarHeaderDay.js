@@ -70,7 +70,7 @@ export const CalendarHeaderDay = () => {
         </span>
      
 
-      <h2 className="ml-5 mt-3 w-72 px-10 text-xl text-gray-500 font-bold">
+      <h2 className="ml-5 mt-3 w-72 px-10 text-xl text-gray-500 font-bold max-md:pl-2 max-md:pr-0">
         {dayjs(new Date(yearIndex, monthIndex, dayIndex)).format(
           "MMMM D, YYYY"
         )}

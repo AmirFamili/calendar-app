@@ -34,7 +34,7 @@ function App() {
           <Route
             path="/calendar-app"
             element={
-              <div className="h-screen w-full flex flex-col overflow-hidden ">
+              <div className="h-screen w-full flex flex-col overflow-auto ">
                 <CalendarHeader />
                 <Month month={currentMonth} />
                 
@@ -45,7 +45,7 @@ function App() {
           <Route
             path="/calendar-app/day"
             element={
-              <div className="h-screen  w-full flex flex-col overflow-hidden">
+              <div className="h-screen  w-full flex flex-col overflow-auto">
                  <CalendarHeaderDay />
                 <Day day={currentDay} month={currentMonth}/>
               </div>

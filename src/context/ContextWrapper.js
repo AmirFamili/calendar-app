@@ -27,7 +27,8 @@ export default function ConextWrapper(props) {
   const [smallCalendarMonth, setSmallCalendarMonth] = useState(null);
   const [smallCalendarYear, setSmallCalendarYear] = useState(null);
   const [daySelected, setDaySelected] = useState(dayjs());
-  const [hourSelected,setHourSelected]=useState('8:00');
+  const [startHourSelected,setStartHourSelected]=useState(7);
+  const [endHourSelected,setEndHourSelected]=useState(startHourSelected+1);
   const [showEventModal, setShowEventModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [labels, setLabels] = useState([]);
@@ -101,8 +102,10 @@ export default function ConextWrapper(props) {
         setSmallCalendarYear,
         daySelected,
         setDaySelected,
-        hourSelected,
-        setHourSelected,
+        startHourSelected,
+        setStartHourSelected,
+        endHourSelected,
+        setEndHourSelected,
         showEventModal,
         setShowEventModal,
         dispatchCalEvent,
