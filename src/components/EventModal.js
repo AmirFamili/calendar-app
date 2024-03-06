@@ -71,42 +71,78 @@ export default function EventModal() {
         setPopupModel(null);
       }
     }
+    if (popupModel === "filled") {
+      setShowEventModal(false);
+      setConfirmation(false);
+      setPopupModel(null);
+    }
   }, [confirmation]);
 
-  // useEffect(() => {
-  //   if (checkSave !== null) {
-  //     if (checkSave) {
-  //       console.log(checkSave);
-  //       console.log("save");
-  //       setPopupModel("save");
-  //       setShowPopup(true);
-  //       setCheckSave(null);
-  //     } else {
-  //       console.log(checkSave);
-  //       console.log("not Save");
-  //       setCheckSave(null);
-  //     }
-  //   }
-  // }, [checkSave]);
+  useEffect(() => {
+
+    if (checkSave !== null) {
+    
+      if (checkSave === true) {
+       
+        setPopupModel("save");
+        setShowPopup(true);
+        setCheckSave(null);
+      } else {
+      
+        setPopupModel("filled");
+        setShowPopup(true);
+        setCheckSave(null);
+      }
+    }
+  }, [checkSave]);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setPopupModel("save");
-    setShowPopup(true);
-    // const storageEvents = localStorage.getItem("savedEvents");
-    // const parsedEvents = storageEvents ? JSON.parse(storageEvents) : [];
-    // parsedEvents.map((event) => {
-    //   const timeS = event.timeStart.split(":").map((val) => parseInt(val))[0];
-    //   const timeE = event.timeEnd.split(":").map((val) => parseInt(val))[0];
-    //   const timeStartNew = timeStart.split(":").map((val) => parseInt(val))[0];
-    //   const timeEndNew = timeEnd.split(":").map((val) => parseInt(val))[0];
+    
+    const storageEvents = localStorage.getItem("savedEvents");
+    const parsedEvents = storageEvents ? JSON.parse(storageEvents) : [];
 
-    // if (timeStartNew <= timeS && timeE >= timeEndNew) {
-    //   setCheckSave(false);
-    // } else {
-    //   setCheckSave(true);
-    // }
-    // });
+    if (parsedEvents.length < 1) {
+      setCheckSave(true);
+     
+    } else {
+   
+
+      for (let event = 0; event < parsedEvents.length; event++) {
+        if (
+          dayjs(parsedEvents[event].day).format("DD-MM-YY") ===
+          daySelected.format("DD-MM-YY")
+        ) {
+          const timeS = parsedEvents[event].timeStart
+            .split(":")
+            .map((val) => parseInt(val))[0];
+          const timeE = parsedEvents[event].timeEnd
+            .split(":")
+            .map((val) => parseInt(val))[0];
+          const timeStartNew = timeStart
+            .split(":")
+            .map((val) => parseInt(val))[0];
+          const timeEndNew = timeEnd.split(":").map((val) => parseInt(val))[0];
+
+          if (timeStartNew >= timeS && timeEndNew <= timeE) {
+            setCheckSave(false);
+            break;
+          } else if (timeS <= timeStartNew && timeStartNew < timeE) {
+            setCheckSave(false);
+            break;
+          } else if (timeS < timeEndNew && timeEndNew <= timeE) {
+            setCheckSave(false);
+            break;
+          } else if (timeS >timeStartNew && timeEndNew >timeE) {
+            setCheckSave(false);
+            break;
+          } 
+        }else {
+          setCheckSave(true);
+        }
+      }
+    }
   };
 
   return (

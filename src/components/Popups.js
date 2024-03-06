@@ -10,10 +10,10 @@ export const Popups = () => {
         <h3 className="p-2">
           {popupModel === "save"
             ? "Are you sure you want to save?"
-            :popupModel === "close"? "Unsaved changes, do you want to close?":'Do you want to delete this Event?'}
+            :popupModel === "close"?"Unsaved changes, do you want to close?":popupModel === "filled"?'You have event this time!':'Do you want to delete this Event?'}
         </h3>
         <div className="flex justify-center items-center mt-3">
-          <button
+          {popupModel === "filled"?'':<button
             className="py-1 px-5 mx-1 border rounded-md  shadow-sm bg-slate-50 hover:bg-blue-600 hover:text-white"
             onClick={() => {
               setConfirmation(false);
@@ -21,7 +21,8 @@ export const Popups = () => {
             }}
           >
             No
-          </button>
+          </button>}
+          
           <button
             className="py-1 px-5 mx-1 border rounded-md shadow-sm bg-slate-50
           hover:bg-blue-600 hover:text-white"
@@ -30,7 +31,7 @@ export const Popups = () => {
               setShowPopup(false);
             }}
           >
-            Yes
+           {popupModel === "filled"?'Ok':' Yes'}
           </button>
         </div>
       </div>

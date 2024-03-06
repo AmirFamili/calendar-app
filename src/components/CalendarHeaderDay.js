@@ -50,32 +50,32 @@ export const CalendarHeaderDay = () => {
   
   };
   return (
-    <header className="p-4 pl-6 flex item-center ">
-   
-        <span onClick={handlePrevDay} className="material-icons-outlined cursor-pointer bg-slate-100 rounded-tl-lg  rounded-bl-lg text-gray-800 h-14 border-r-white flex justify-center items-center">
+    <header className="p-4 pl-6 flex item-center max-md:pl-2  max-md:block max-md:text-center max-md:pb-6">
+   <div className="flex item-center  max-md:justify-center">
+        <span onClick={handlePrevDay} className="material-icons-outlined cursor-pointer bg-slate-100 rounded-tl-lg  rounded-bl-lg text-gray-800 h-12 border-r-white flex justify-center items-center max-md:h-10">
           chevron_left
         </span>
      
 
       <button
-        className="border-r border-l  border-white h-14 py-2 px-4 bg-slate-100"
+        className="border-r border-l  border-white h-12 py-2 px-4 bg-slate-100 max-md:h-10 max-md:px-2 "
         onClick={handleReset}
       >
         Today
       </button>
 
     
-        <span onClick={handleNextDay} className="material-icons-outlined cursor-pointer bg-slate-100 rounded-tr-lg  rounded-br-lg text-gray-800 h-14 border-r-white flex justify-center items-center">
+        <span onClick={handleNextDay} className="material-icons-outlined cursor-pointer bg-slate-100 rounded-tr-lg  rounded-br-lg text-gray-800 h-12 border-r-white flex justify-center items-center max-md:h-10">
           chevron_right
         </span>
      
 
-      <h2 className="ml-5 mt-3 w-72 px-10 text-xl text-gray-500 font-bold max-md:pl-2 max-md:pr-0">
+      <h2 className="ml-5 mt-3 w-72 px-10 text-xl text-gray-500 font-bold max-lg:px-5 max-lg:w-52 max-lg:ml-3 max-md:pl-2 max-md:pr-0 max-md:text-lg ">
         {dayjs(new Date(yearIndex, monthIndex, dayIndex)).format(
           "MMMM D, YYYY"
         )}
-      </h2>
-      <div className="p-1 ml-10 mt-2">
+      </h2></div>
+      <div className="p-1  mt-2 max-md:mt-5 ">
         <Link
           to={"/calendar-app"}
           className="px-3 py-1 border mr-0.5 rounded-l-lg"

@@ -7,7 +7,7 @@ export const Sidebar = () => {
   const { setShowEventModal,  setHourSelected } = useContext(GlobalContext);
 
   return (
-    <aside className="min-w-72 p-3 bg-slate-900 text-white">
+    <aside className="min-w-72 p-3 bg-slate-900 text-white max-md:hidden">
       <div className="text-right pt-2">
         <button
           onClick={() => {
