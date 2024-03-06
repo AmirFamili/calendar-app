@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/AmirFamili/calendar-app/static/css/main.f661ae76.css",
-    "main.js": "/AmirFamili/calendar-app/static/js/main.35e329ec.js",
-    "index.html": "/AmirFamili/calendar-app/index.html",
-    "main.f661ae76.css.map": "/AmirFamili/calendar-app/static/css/main.f661ae76.css.map",
-    "main.35e329ec.js.map": "/AmirFamili/calendar-app/static/js/main.35e329ec.js.map"
+    "main.css": "/calendar-app/static/css/main.f661ae76.css",
+    "main.js": "/calendar-app/static/js/main.35e329ec.js",
+    "index.html": "/calendar-app/index.html",
+    "main.f661ae76.css.map": "/calendar-app/static/css/main.f661ae76.css.map",
+    "main.35e329ec.js.map": "/calendar-app/static/js/main.35e329ec.js.map"
   },
   "entrypoints": [
     "static/css/main.f661ae76.css",
