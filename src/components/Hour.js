@@ -9,7 +9,6 @@ export const Hour = ({ hour, month }) => {
     setShowEventModal,
     filteredEvents,
     setSelectedEvent,
-    startHourSelected,
     setStartHourSelected,
     setEndHourSelected,
   } = useContext(GlobalContext);
