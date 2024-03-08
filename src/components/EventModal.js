@@ -99,9 +99,13 @@ export default function EventModal() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     const storageEvents = localStorage.getItem("savedEvents");
     const parsedEvents = storageEvents ? JSON.parse(storageEvents) : [];
+if(selectedEvent){
+  setCheckSave(true);
+}else{
+
 
     if (parsedEvents.length < 1) {
       setCheckSave(true);
@@ -126,23 +130,36 @@ export default function EventModal() {
           const timeEndNew = timeEnd.split(":").map((val) => parseInt(val))[0];
 
           if (timeStartNew >= timeS && timeEndNew <= timeE) {
+          console.log('1');
+
             setCheckSave(false);
             break;
           } else if (timeS <= timeStartNew && timeStartNew < timeE) {
+          console.log('2');
+
             setCheckSave(false);
             break;
           } else if (timeS < timeEndNew && timeEndNew <= timeE) {
+          console.log('3');
+
             setCheckSave(false);
             break;
           } else if (timeS >timeStartNew && timeEndNew >timeE) {
+          console.log('4');
+
             setCheckSave(false);
             break;
-          } 
+          } else{
+            setCheckSave(true);
+          }
         }else {
+          console.log('5');
           setCheckSave(true);
         }
       }
-    }
+
+     
+    }}
   };
 
   return (
